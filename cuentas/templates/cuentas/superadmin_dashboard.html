@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+    <h1 class="mb-4">Panel Super Admin</h1>
+    <p class="text-muted">Bienvenido <strong>{{ request.user.email }}</strong></p>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Compañías</h5>
+                </div>
+                <div class="card-body">
+                    <p>Total registradas: <strong>{{ total_companias }}</strong></p>
+                    <a href="{% url 'compania_listar' %}" class="btn btn-primary btn-sm">Ver compañías</a>
+                    <a href="{% url 'compania_crear' %}" class="btn btn-success btn-sm">+ Nueva</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Usuarios</h5>
+                </div>
+                <div class="card-body">
+                    <p>Total usuarios: <strong>{{ total_usuarios }}</strong></p>
+                    <a href="{% url 'usuario_listar' %}" class="btn btn-info btn-sm">Ver usuarios</a>
+                    <a href="{% url 'usuario_crear' %}" class="btn btn-success btn-sm">+ Nuevo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="mb-0">Planes de Suscripción</h5>
+                </div>
+                <div class="card-body">
+                    <p>Planes definidos: <strong>{{ total_planes }}</strong></p>
+                    <p class="small text-muted">Gestiona la oferta comercial.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

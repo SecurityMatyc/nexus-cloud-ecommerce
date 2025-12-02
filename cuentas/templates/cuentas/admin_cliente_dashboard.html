@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+    <h1 class="mb-4">Panel — Admin Cliente</h1>
+    <p class="text-muted">Bienvenido <strong>{{ request.user.nombre }}</strong></p>
+
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">Tu Compañía: <strong>{{ compania.nombre }}</strong></h5>
+        </div>
+        <div class="card-body">
+            <p><strong>RUT:</strong> {{ compania.rut }}</p>
+            <p><strong>Dirección:</strong> {{ compania.direccion }}</p>
+            <p><strong>Teléfono:</strong> {{ compania.telefono }}</p>
+            <p class="mb-0"><strong>Estado:</strong> {% if compania.aprobada %}<span class="badge bg-success">Aprobada</span>{% else %}<span class="badge bg-warning">Pendiente aprobación</span>{% endif %}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">📦 Productos</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Gestiona tu catálogo de productos</p>
+                    <a href="{% url 'admin_productos_listar' %}" class="btn btn-primary btn-sm">Ver productos</a>
+                    <a href="{% url 'admin_productos_crear' %}" class="btn btn-success btn-sm">+ Nuevo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">🏢 Sucursales</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Administra tus puntos de venta</p>
+                    <a href="{% url 'admin_sucursales_listar' %}" class="btn btn-info btn-sm">Ver sucursales</a>
+                    <a href="{% url 'admin_sucursales_crear' %}" class="btn btn-success btn-sm">+ Nueva</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="mb-0">🤝 Proveedores</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Gestiona tus proveedores</p>
+                    <a href="{% url 'admin_proveedores_listar' %}" class="btn btn-warning btn-sm">Ver proveedores</a>
+                    <a href="{% url 'admin_proveedores_crear' %}" class="btn btn-success btn-sm">+ Nuevo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">📊 Inventario</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Control de stock en tus sucursales</p>
+                    <a href="{% url 'admin_inventario_listar' %}" class="btn btn-danger btn-sm">Ver inventario</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">👥 Usuarios</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Gestiona los usuarios de tu empresa</p>
+                    <a href="{% url 'admin_usuarios_listar' %}" class="btn btn-secondary btn-sm">Ver usuarios</a>
+                    <a href="{% url 'admin_usuarios_crear' %}" class="btn btn-success btn-sm">+ Nuevo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

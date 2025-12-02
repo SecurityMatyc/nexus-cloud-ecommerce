@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+    <h2 class="mb-4">Usuarios — {{ compania.nombre }}</h2>
+    <a href="{% url 'admin_usuarios_crear' %}" class="btn btn-success mb-3">+ Nuevo Usuario</a>
+    <a href="{% url 'dashboard_admin_cliente' %}" class="btn btn-secondary mb-3">← Volver</a>
+
+    {% if usuarios %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Activo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in usuarios %}
+            <tr>
+                <td>{{ u.nombre }}</td>
+                <td>{{ u.email }}</td>
+                <td><span class="badge bg-info">{{ u.rol }}</span></td>
+                <td>{% if u.is_active %}<span class="badge bg-success">Sí</span>{% else %}<span class="badge bg-danger">No</span>{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">No hay usuarios. <a href="{% url 'admin_usuarios_crear' %}">Crear uno aquí</a>.</div>
+    {% endif %}
+
+</div>
+{% endblock %}

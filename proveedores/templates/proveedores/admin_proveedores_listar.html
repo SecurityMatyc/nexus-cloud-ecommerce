@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+    <h2 class="mb-4">Proveedores — {{ compania.nombre }}</h2>
+    <a href="{% url 'admin_proveedores_crear' %}" class="btn btn-success mb-3">+ Nuevo Proveedor</a>
+    <a href="{% url 'dashboard_admin_cliente' %}" class="btn btn-secondary mb-3">← Volver</a>
+
+    {% if proveedores %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>RUT</th>
+                <th>Contacto</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in proveedores %}
+            <tr>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.rut }}</td>
+                <td>{{ p.contacto }}</td>
+                <td>{{ p.email }}</td>
+                <td>{{ p.telefono }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">No hay proveedores. <a href="{% url 'admin_proveedores_crear' %}">Crear uno aquí</a>.</div>
+    {% endif %}
+
+</div>
+{% endblock %}

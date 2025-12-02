@@ -1,0 +1,45 @@
+# === Entorno virtual ===
+env/
+venv/
+ENV/
+
+# === Archivos de Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# === Editor / IDE ===
+.vscode/
+.idea/
+
+# === Archivos del sistema ===
+.DS_Store
+Thumbs.db
+
+# === Archivos de migraciones que no deben trackearse manualmente ===
+*/migrations/__pycache__/
+*/migrations/*.py
+
+# Pero mantén el archivo __init__.py
+!*/migrations/__init__.py
+
+# === Archivos de Django ===
+*.sqlite3
+db.sqlite3
+
+# === Archivos estáticos compilados ===
+staticfiles/
+static/
+
+# === Logs ===
+*.log
+
+# === Archivos temporales ===
+tmp/
+*.tmp
+
+# === Node / frontend (si algún día agregas) ===
+node_modules/
+build/
+dist/

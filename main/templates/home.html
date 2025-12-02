@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!--====== SLIDER / HERO ======-->
+    <section id="home" class="slider_area">
+        <div id="carouselMain" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselMain" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselMain" data-slide-to="1"></li>
+            </ol>
+
+            <div class="carousel-inner">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="slider-content">
+                                    <h1 class="title">POS y E-Commerce para Pymes en la Nube</h1>
+                                    <p class="text">
+                                        Nexasoft Cloud permite a comercios gestionar ventas presenciales y en línea,
+                                        inventario y reportes desde una sola plataforma.
+                                    </p>
+                                    <ul class="slider-btn rounded-buttons">
+                                        <li><a class="main-btn rounded-one" href="#pricing">Ver planes</a></li>
+                                        <li><a class="main-btn rounded-two" href="#services">Ver funcionalidades</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slider-image-box d-none d-lg-flex align-items-end">
+                        <div class="slider-image">
+                            <img src="{% static 'assets/images/slider/1.png' %}" alt="Panel Nexasoft Cloud">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="slider-content">
+                                    <h1 class="title">Multi-tenant para múltiples tiendas</h1>
+                                    <p class="text">
+                                        Cada cliente trabaja en su propio espacio (tenant) con usuarios, productos
+                                        y ventas totalmente aislados y seguros.
+                                    </p>
+                                    <ul class="slider-btn rounded-buttons">
+                                        <li><a class="main-btn rounded-one" href="#pricing">Comenzar ahora</a></li>
+                                        <li><a class="main-btn rounded-two" href="#contact">Hablar con soporte</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slider-image-box d-none d-lg-flex align-items-end">
+                        <div class="slider-image">
+                            <img src="{% static 'assets/images/slider/2.png' %}" alt="Módulos de Nexasoft Cloud">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <a class="carousel-control-prev" href="#carouselMain" role="button" data-slide="prev">
+                <i class="lni lni-arrow-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#carouselMain" role="button" data-slide="next">
+                <i class="lni lni-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!--====== SERVICES / FEATURES ======-->
+    <section id="services" class="features-area">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-10">
+                    <div class="section-title text-center pb-10">
+                        <h3 class="title">Módulos principales</h3>
+                        <p class="text">
+                            Nexasoft Cloud entrega a cada comercio un conjunto de herramientas para operar su negocio
+                            presencial y en línea desde un solo lugar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-4 col-md-7 col-sm-9">
+                    <div class="single-features mt-40">
+                        <div class="features-title-icon d-flex justify-content-between">
+                            <h4 class="features-title"><a href="#">POS Presencial</a></h4>
+                            <div class="features-icon">
+                                <i class="lni lni-cart"></i>
+                                <img class="shape" src="{% static 'assets/images/f-shape-1.svg' %}" alt="Shape">
+                            </div>
+                        </div>
+                        <div class="features-content">
+                            <p class="text">
+                                Registro rápido de ventas, emisión de comprobantes y control de caja por turno.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-7 col-sm-9">
+                    <div class="single-features mt-40">
+                        <div class="features-title-icon d-flex justify-content-between">
+                            <h4 class="features-title"><a href="#">E-Commerce</a></h4>
+                            <div class="features-icon">
+                                <i class="lni lni-world"></i>
+                                <img class="shape" src="{% static 'assets/images/f-shape-1.svg' %}" alt="Shape">
+                            </div>
+                        </div>
+                        <div class="features-content">
+                            <p class="text">
+                                Catálogo online por tienda, carrito de compras y registro de pedidos web.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-7 col-sm-9">
+                    <div class="single-features mt-40">
+                        <div class="features-title-icon d-flex justify-content-between">
+                            <h4 class="features-title"><a href="#">Inventario & Reportes</a></h4>
+                            <div class="features-icon">
+                                <i class="lni lni-stats-up"></i>
+                                <img class="shape" src="{% static 'assets/images/f-shape-1.svg' %}" alt="Shape">
+                            </div>
+                        </div>
+                        <div class="features-content">
+                            <p class="text">
+                                Stock por bodega, alertas de quiebre, histórico de movimientos y reportes por rol.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- row -->
+        </div>
+    </section>
+
+    <!--====== PRICING ======-->
+    <section id="pricing" class="pricing-area">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-10">
+                    <div class="section-title text-center pb-25">
+                        <h3 class="title">Planes de suscripción</h3>
+                        <p class="text">
+                            Todos los planes incluyen acceso multi-usuario, soporte básico y actualización
+                            continua de la plataforma.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+
+                <!-- Plan Básico -->
+                <div class="col-lg-4 col-md-7 col-sm-9">
+                    <div class="pricing-style mt-30">
+                        <div class="pricing-icon text-center">
+                            <img src="{% static 'assets/images/basic.svg' %}" alt="">
+                        </div>
+                        <div class="pricing-header text-center">
+                            <h5 class="sub-title">Básico</h5>
+                            <p class="month"><span class="price">$ 19.990</span>/mes</p>
+                        </div>
+                        <div class="pricing-list">
+                            <ul>
+                                <li><i class="lni lni-check-mark-circle"></i> 1 tienda (tenant)</li>
+                                <li><i class="lni lni-check-mark-circle"></i> Hasta 2 usuarios (admin cliente + vendedor)</li>
+                                <li><i class="lni lni-check-mark-circle"></i> POS presencial + inventario básico</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-btn rounded-buttons text-center">
+                            <a class="main-btn rounded-one" href="#contact">Solicitar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan Pro -->
+                <div class="col-lg-4 col-md-7 col-sm-9">
+                    <div class="pricing-style mt-30">
+                        <div class="pricing-icon text-center">
+                            <img src="{% static 'assets/images/pro.svg' %}" alt="">
+                        </div>
+                        <div class="pricing-header text-center">
+                            <h5 class="sub-title">Estandar</h5>
+                            <p class="month"><span class="price">$ 39.990</span>/mes</p>
+                        </div>
+                        <div class="pricing-list">
+                            <ul>
+                                <li><i class="lni lni-check-mark-circle"></i> 1 tienda</li>
+                                <li><i class="lni lni-check-mark-circle"></i> Hasta 5 usuarios</li>
+                                <li><i class="lni lni-check-mark-circle"></i> POS + e-commerce + reportes de ventas</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-btn rounded-buttons text-center">
+                            <a class="main-btn rounded-one" href="#contact">Solicitar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan Enterprise -->
+                <div class="col-lg-4 col-md-7 col-sm-9">
+                    <div class="pricing-style mt-30">
+                        <div class="pricing-icon text-center">
+                            <img src="{% static 'assets/images/enterprise.svg' %}" alt="">
+                        </div>
+                        <div class="pricing-header text-center">
+                            <h5 class="sub-title">Premium</h5>
+                            <p class="month"><span class="price">$ 79.990 / mes</span></p>
+                        </div>
+                        <div class="pricing-list">
+                            <ul>
+                                <li><i class="lni lni-check-mark-circle"></i> Múltiples tiendas</li>
+                                <li><i class="lni lni-check-mark-circle"></i> Integraciones avanzadas</li>
+                                <li><i class="lni lni-check-mark-circle"></i> Soporte prioritario</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-btn rounded-buttons text-center">
+                            <a class="main-btn rounded-one" href="#contact">Solicitar</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- row -->
+        </div>
+    </section>
+
+    <!--====== CONTACT ======-->
+    <section id="contact" class="contact-area">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-10">
+                    <div class="section-title text-center pb-30">
+                        <h3 class="title">Contacto</h3>
+                        <p class="text">
+                            ¿Quieres ver cómo Nexasoft Cloud se ajusta al caso de tu pyme? Escríbenos y coordinamos una demo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info simple, sin formulario real aún -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-contact-info contact-color-1 mt-30 d-flex">
+                        <div class="contact-info-icon">
+                            <i class="lni lni-map-marker"></i>
+                        </div>
+                        <div class="contact-info-content media-body">
+                            <p class="text">Temuco, Chile</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-contact-info contact-color-2 mt-30 d-flex">
+                        <div class="contact-info-icon">
+                            <i class="lni lni-envelope"></i>
+                        </div>
+                        <div class="contact-info-content media-body">
+                            <p class="text">contacto@nexasoftcloud.cl</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-contact-info contact-color-3 mt-30 d-flex">
+                        <div class="contact-info-icon">
+                            <i class="lni lni-phone"></i>
+                        </div>
+                        <div class="contact-info-content media-body">
+                            <p class="text">+56 9 1234 5678</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

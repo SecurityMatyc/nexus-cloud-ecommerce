@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Listado de Compañías</h1>
+        <a href="{% url 'compania_crear' %}" class="btn btn-success">+ Crear compañía</a>
+    </div>
+
+    {% if companias %}
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>RUT</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in companias %}
+            <tr>
+                <td>{{ c.nombre }}</td>
+                <td>{{ c.rut }}</td>
+                <td>{{ c.direccion }}</td>
+                <td>{{ c.telefono }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">No hay compañías registradas. <a href="{% url 'compania_crear' %}">Crear una aquí</a></div>
+    {% endif %}
+</div>
+{% endblock %}

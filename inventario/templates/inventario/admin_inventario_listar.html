@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+    <h2 class="mb-4">Inventario — {{ compania.nombre }}</h2>
+    <a href="{% url 'dashboard_admin_cliente' %}" class="btn btn-secondary mb-3">← Volver</a>
+
+    <div class="mb-3">
+        <label class="form-label">Filtrar por sucursal:</label>
+        <form method="GET" class="d-flex gap-2">
+            <select name="sucursal" class="form-select" onchange="this.form.submit()">
+                <option value="">-- Todas --</option>
+                {% for s in sucursales %}
+                <option value="{{ s.id }}" {% if request.GET.sucursal|stringformat:"s" == s.id|stringformat:"s" %}selected{% endif %}>{{ s.nombre }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    {% if inventarios %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Sucursal</th>
+                <th>Producto</th>
+                <th>Stock</th>
+                <th>Punto de Reorden</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inv in inventarios %}
+            <tr>
+                <td>{{ inv.sucursal.nombre }}</td>
+                <td>{{ inv.producto.nombre }} ({{ inv.producto.sku }})</td>
+                <td><strong>{{ inv.stock }}</strong></td>
+                <td>{{ inv.punto_reorden }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">No hay items de inventario. Crea productos y sucursales primero.</div>
+    {% endif %}
+
+</div>
+{% endblock %}

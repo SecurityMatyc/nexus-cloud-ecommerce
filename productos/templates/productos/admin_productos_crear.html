@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+    <h2 class="mb-4">Crear Producto — {{ compania.nombre }}</h2>
+    <a href="{% url 'admin_productos_listar' %}" class="btn btn-secondary mb-3">← Volver</a>
+
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" class="form-horizontal">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label class="form-label">SKU *</label>
+            <input type="text" name="sku" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nombre *</label>
+            <input type="text" name="nombre" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Precio (venta) *</label>
+            <input type="number" name="precio" class="form-control" step="0.01" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Costo</label>
+            <input type="number" name="costo" class="form-control" step="0.01">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Categoría</label>
+            <input type="text" name="categoria" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+
+</div>
+{% endblock %}
