@@ -28,10 +28,6 @@ Thumbs.db
 *.sqlite3
 db.sqlite3
 
-# === Archivos estáticos compilados ===
-staticfiles/
-static/
-
 # === Logs ===
 *.log
 
