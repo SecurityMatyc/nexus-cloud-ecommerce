@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base_panel.html" %}
 
 {% block content %}
 <div class="container mt-5 pt-3 pb-5">
@@ -15,8 +15,10 @@
                 <th>RUT</th>
                 <th>Dirección</th>
                 <th>Teléfono</th>
+                <th>Acciones</th>
             </tr>
         </thead>
+
         <tbody>
             {% for c in companias %}
             <tr>
@@ -24,12 +26,23 @@
                 <td>{{ c.rut }}</td>
                 <td>{{ c.direccion }}</td>
                 <td>{{ c.telefono }}</td>
+                <td>
+                    <a href="{% url 'compania_eliminar' c.id %}" 
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('¿Seguro que quieres eliminar esta compañía?');">
+                        Eliminar
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
     {% else %}
-    <div class="alert alert-info">No hay compañías registradas. <a href="{% url 'compania_crear' %}">Crear una aquí</a></div>
+    <div class="alert alert-info">
+        No hay compañías registradas.
+        <a href="{% url 'compania_crear' %}">Crear una aquí</a>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

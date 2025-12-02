@@ -54,3 +54,12 @@ def admin_productos_crear(request):
         return redirect("admin_productos_listar")
     
     return render(request, "productos/admin_productos_crear.html", {"compania": compania})
+
+@login_required
+def listar_productos(request):
+    # Solo admin_cliente, gerente o vendedor
+    if request.user.rol not in ("admin_cliente", "gerente", "vendedor"):
+        return HttpResponseForbidden("No tienes permiso para ver productos.")
+
+    productos = Producto.objects.all()
+    return render(request, "productos/listar_productos.html", {"productos": productos})

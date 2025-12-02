@@ -1,0 +1,31 @@
+{% extends "base_panel.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Inventario por sucursal</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Sucursal</th>
+                <th>Producto</th>
+                <th>Stock</th>
+                <th>Punto de reposición</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in inventario %}
+            <tr>
+                <td>{{ i.sucursal.nombre }}</td>
+                <td>{{ i.producto.nombre }}</td>
+                <td>{{ i.stock }}</td>
+                <td>{{ i.reorder_point }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay registros de inventario.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base_panel.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Listado de proveedores</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>RUT</th>
+                <th>Contacto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in proveedores %}
+            <tr>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.rut }}</td>
+                <td>{{ p.contacto }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No hay proveedores registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

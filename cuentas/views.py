@@ -51,7 +51,7 @@ def dashboard_redirect(request):
         return redirect('dashboard_admin_cliente')
 
     if user.rol == 'gerente':
-        return redirect('dashboard_gerente')
+        return redirect('gerente_dashboard')
 
     if user.rol == 'vendedor':
         return redirect('dashboard_vendedor')
@@ -250,3 +250,85 @@ def admin_usuarios_crear(request):
         return redirect("admin_usuarios_listar")
     
     return render(request, "cuentas/admin_usuarios_crear.html", {"compania": compania})
+
+@login_required
+def gerente_dashboard(request):
+    if request.user.rol != "gerente":
+        return render(request, "errors/403.html", status=403)
+
+    return render(request, "cuentas/gerente_dashboard.html")
+
+@login_required
+def usuario_eliminar(request, id):
+    if request.user.rol != "superadmin":
+        return HttpResponseForbidden("No tienes permiso.")
+
+    try:
+        usuario = Usuario.objects.get(id=id)
+    except Usuario.DoesNotExist:
+        return HttpResponse("Usuario no encontrado.")
+
+    usuario.delete()
+    return redirect("usuario_listar")
+
+
+@login_required
+def compania_eliminar(request, id):
+    if request.user.rol != "superadmin":
+        return HttpResponseForbidden("No tienes permiso.")
+
+    try:
+        compania = Compania.objects.get(id=id)
+    except Compania.DoesNotExist:
+        return HttpResponse("Compañía no encontrada.")
+
+    compania.delete()
+    return redirect("compania_listar")
+
+@login_required
+def dashboard_vendedor(request):
+    if request.user.rol != "vendedor":
+        return HttpResponseForbidden("No tienes permiso para acceder aquí.")
+
+    compania = getattr(request.user, "compania", None)
+
+    return render(
+        request,
+        "cuentas/vendedor_dashboard.html",
+        {"compania": compania}
+    )
+
+@login_required
+def inventario_nuevo(request):
+    empresa = request.user.compania
+
+    productos = Producto.objects.filter(compania=empresa, activo=True)
+    sucursales = Sucursal.objects.filter(compania=empresa)
+
+    if request.method == "POST":
+        producto_id = request.POST.get("producto")
+        sucursal_id = request.POST.get("sucursal")
+        stock = int(request.POST.get("stock"))
+        reposicion = int(request.POST.get("reposicion"))
+
+        producto = Producto.objects.get(id=producto_id)
+        sucursal = Sucursal.objects.get(id=sucursal_id)
+
+        inv, created = Inventario.objects.get_or_create(
+            producto=producto,
+            sucursal=sucursal,
+            defaults={"stock": stock, "punto_reposicion": reposicion}
+        )
+
+        if not created:
+            inv.stock = stock
+            inv.punto_reposicion = reposicion
+            inv.save()
+
+        return redirect("admin_inventario_listar")
+
+    return render(request, "inventario_nuevo.html", {
+        "productos": productos,
+        "sucursales": sucursales,
+    })
+

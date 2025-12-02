@@ -1,0 +1,183 @@
+{% extends "base_panel.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">POS - Punto de Venta</h2>
+
+    <!-- SELECCIÓN DE SUCURSAL -->
+    <div class="mb-4">
+        <label class="form-label">Selecciona sucursal</label>
+        <select id="sucursalSelect" class="form-select">
+            <option value="">-- Selecciona --</option>
+            {% for s in sucursales %}
+                <option value="{{ s.id }}">{{ s.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- BUSCADOR -->
+    <div class="mb-3">
+        <label class="form-label">Buscar productos</label>
+        <input id="buscar" type="text" class="form-control" placeholder="Escribe nombre o SKU">
+
+        <!-- RESULTADOS AUTOCOMPLETE -->
+        <ul id="resultadosBusqueda" class="list-group mt-2"></ul>
+    </div>
+
+    <hr>
+
+    <!-- CARRITO -->
+    <h4>Carrito</h4>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cant.</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="carritoBody"></tbody>
+    </table>
+
+    <h3 class="text-end mt-3">Total: $<span id="totalSpan">0</span></h3>
+
+    <button id="btnPagar" class="btn btn-success w-100 mt-4" disabled>Registrar Venta</button>
+
+</div>
+
+<script>
+/* ============================
+   AUTOCOMPLETE DE PRODUCTOS
+   ============================ */
+
+document.getElementById("buscar").addEventListener("input", function () {
+    let q = this.value.trim();
+    let sucursal = document.getElementById("sucursalSelect").value;
+
+    if (!sucursal) {
+        resultadosBusqueda.innerHTML = "";
+        return;
+    }
+
+    if (q.length < 1) {
+        resultadosBusqueda.innerHTML = "";
+        return;
+    }
+
+    fetch(`/ventas/vendedor/pos/buscar-productos/?q=${q}&sucursal=${sucursal}`)
+        .then(res => res.json())
+        .then(data => {
+            resultadosBusqueda.innerHTML = "";
+            data.forEach(p => {
+                resultadosBusqueda.innerHTML += `
+                    <li class="list-group-item item-busqueda"
+                        data-id="${p.id}"
+                        data-nombre="${p.nombre}"
+                        data-precio="${p.precio}">
+                        ${p.nombre} — $${p.precio}
+                    </li>`;
+            });
+        });
+});
+
+/* CUANDO EL USUARIO HACE CLICK EN UN RESULTADO */
+document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("item-busqueda")) {
+        let id = e.target.dataset.id;
+        let nombre = e.target.dataset.nombre;
+        let precio = parseFloat(e.target.dataset.precio);
+
+        agregar(id, nombre, precio);
+        resultadosBusqueda.innerHTML = "";
+        document.getElementById("buscar").value = "";
+    }
+});
+</script>
+
+
+<script>
+/* ============================
+   SISTEMA DE CARRITO POS
+   ============================ */
+
+let carrito = [];
+
+function renderCarrito() {
+    let body = document.getElementById("carritoBody");
+    let totalSpan = document.getElementById("totalSpan");
+    body.innerHTML = "";
+
+    let total = 0;
+
+    carrito.forEach((item, index) => {
+        let subtotal = item.cantidad * item.precio;
+        total += subtotal;
+
+        body.innerHTML += `
+            <tr>
+                <td>${item.nombre}</td>
+                <td>$${item.precio}</td>
+                <td>
+                    <input type="number" min="1" value="${item.cantidad}"
+                           class="form-control"
+                           onchange="cambiarCantidad(${index}, this.value)">
+                </td>
+                <td>$${subtotal}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="eliminar(${index})">X</button>
+                </td>
+            </tr>
+        `;
+    });
+
+    totalSpan.textContent = total;
+    document.getElementById("btnPagar").disabled = carrito.length === 0;
+}
+
+function cambiarCantidad(index, nuevaCant) {
+    carrito[index].cantidad = parseInt(nuevaCant);
+    renderCarrito();
+}
+
+function eliminar(index) {
+    carrito.splice(index, 1);
+    renderCarrito();
+}
+
+function agregar(id, nombre, precio) {
+    carrito.push({ id, nombre, precio, cantidad: 1 });
+    renderCarrito();
+}
+
+/* ============================
+   REGISTRAR VENTA
+   ============================ */
+document.getElementById("btnPagar").addEventListener("click", function () {
+    let sucursal = document.getElementById("sucursalSelect").value;
+
+    fetch("/ventas/vendedor/pos/registrar/", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            sucursal: sucursal,
+            items: carrito
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert("Venta registrada!");
+            carrito = [];
+            renderCarrito();
+        } else {
+            alert("Error: " + data.error);
+        }
+    });
+});
+</script>
+
+{% endblock %}

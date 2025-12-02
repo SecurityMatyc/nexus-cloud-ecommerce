@@ -1,9 +1,10 @@
-{% extends 'base.html' %}
+{% extends "base_panel.html" %}
 
 {% block content %}
 <div class="container mt-5 pt-3 pb-5">
     <h2 class="mb-4">Inventario — {{ compania.nombre }}</h2>
     <a href="{% url 'dashboard_admin_cliente' %}" class="btn btn-secondary mb-3">← Volver</a>
+<a href="{% url 'inventario_nuevo' %}" class="btn btn-success mb-3">+ Nuevo Inventario</a>
 
     <div class="mb-3">
         <label class="form-label">Filtrar por sucursal:</label>

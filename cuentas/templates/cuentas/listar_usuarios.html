@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base_panel.html" %}
 
 {% block content %}
 <div class="container mt-5 pt-3 pb-5">
@@ -15,8 +15,10 @@
                 <th>Nombre</th>
                 <th>Rol</th>
                 <th>Compañía</th>
+                <th>Acciones</th>
             </tr>
         </thead>
+
         <tbody>
             {% for u in usuarios %}
             <tr>
@@ -24,12 +26,23 @@
                 <td>{{ u.nombre }}</td>
                 <td><span class="badge bg-info">{{ u.rol }}</span></td>
                 <td>{{ u.compania.nombre|default:"N/A" }}</td>
+                <td>
+                    <a href="{% url 'usuario_eliminar' u.id %}" 
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('¿Seguro que quieres eliminar este usuario?');">
+                       Eliminar
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
     {% else %}
-    <div class="alert alert-info">No hay usuarios registrados. <a href="{% url 'usuario_crear' %}">Crear uno aquí</a></div>
+    <div class="alert alert-info">
+        No hay usuarios registrados. 
+        <a href="{% url 'usuario_crear' %}">Crear uno aquí</a>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

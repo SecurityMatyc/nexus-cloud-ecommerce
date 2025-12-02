@@ -1,0 +1,32 @@
+{% extends "base_panel.html" %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+    <h1>Mis ventas</h1>
+
+    {% if ventas %}
+        <table class="table table-striped mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Sucursal</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for v in ventas %}
+                <tr>
+                    <td>{{ v.created_at }}</td>
+                    <td>{{ v.sucursal.nombre }}</td>
+                    <td>${{ v.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info mt-3">
+            Aún no tienes ventas registradas.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

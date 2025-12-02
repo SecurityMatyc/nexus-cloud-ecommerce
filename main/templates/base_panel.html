@@ -1,0 +1,72 @@
+{% load static %}
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Nexasoft Cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+    <style>
+        body {
+            background-color: #f7f9fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-navbar {
+            background: white;
+            border-bottom: 1px solid #e6e6e6;
+            padding: 12px 0;
+        }
+
+        .panel-container {
+            flex: 1;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        footer {
+            background: #111;
+            color: #bbb;
+            padding: 15px;
+            text-align: center;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar para paneles -->
+    <nav class="panel-navbar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="/" class="navbar-brand" style="font-weight: 600; color:#0d6efd;">
+                Nexasoft Cloud
+            </a>
+
+            <div>
+                <a href="/accounts/logout/" class="btn btn-outline-primary btn-sm">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido del panel -->
+    <main class="panel-container">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        © 2025 — Nexasoft Cloud. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>

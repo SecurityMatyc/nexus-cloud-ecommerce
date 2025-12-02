@@ -1,0 +1,53 @@
+{% extends "base_panel.html" %}
+
+{% block content %}
+<div class="container mt-5 pt-3 pb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1>Panel de Vendedor</h1>
+            <p class="text-muted mb-0">
+                {% if compania %}
+                    Empresa: <strong>{{ compania.nombre }}</strong>
+                {% else %}
+                    <span class="text-danger">No tienes una compañía asignada.</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-3">
+
+        <!-- Tarjeta: Venta POS -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Venta POS</h5>
+                    <p class="card-text text-muted">
+                        Registrar una nueva venta en caja.
+                    </p>
+                    <a href="{% url 'pos_vendedor' %}" class="btn btn-primary">
+                        Nueva venta
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta: Historial de ventas -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Mis ventas</h5>
+                    <p class="card-text text-muted">
+                        Revisa el historial de tus ventas realizadas.
+                    </p>
+                    <a href="{% url 'ventas_historial' %}" class="btn btn-outline-primary">
+                        Ver historial
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

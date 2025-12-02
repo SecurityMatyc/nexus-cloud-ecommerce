@@ -1,0 +1,31 @@
+{% extends "base_panel.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Reportes de ventas (últimas 50)</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Sucursal</th>
+                <th>Total</th>
+                <th>Vendedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for v in ventas %}
+            <tr>
+                <td>{{ v.created_at }}</td>
+                <td>{{ v.sucursal.nombre }}</td>
+                <td>${{ v.total }}</td>
+                <td>{{ v.usuario.nombre }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay ventas registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

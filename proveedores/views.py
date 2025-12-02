@@ -50,3 +50,12 @@ def admin_proveedores_crear(request):
         return redirect("admin_proveedores_listar")
     
     return render(request, "proveedores/admin_proveedores_crear.html", {"compania": compania})
+
+
+@login_required
+def listar_proveedores(request):
+    if request.user.rol not in ("admin_cliente", "gerente"):
+        return HttpResponseForbidden("No tienes permiso para ver proveedores.")
+
+    proveedores = Proveedor.objects.all()
+    return render(request, "proveedores/listar_proveedores.html", {"proveedores": proveedores})
