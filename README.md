@@ -1,91 +1,114 @@
-# Nexus of Cloud ☁️🛒
-Proyecto academico desarrollado durante 2025 para la Evaluacion 4 de Backend.
+# Nexus of Cloud
 
-Este sistema representa una plataforma ficticia de comercio electronico multiempresa llamada **Nexus of Cloud**, enfocada en la gestion de ventas, inventario y operacion comercial por roles.
+Plataforma web académica de comercio electrónico multiempresa, orientada a la gestión de ventas, inventario, usuarios y roles mediante Django.
 
-## 👥 Autores
-- Matias Gajardo
+Proyecto académico desarrollado durante **2025** para la **Evaluación 4 de Backend**.
+
+## Autores
+
+- Matías Gajardo
 - Jean Pierre Avastia
 
-Trabajo realizado en conjunto como parte del proceso formativo en desarrollo backend.
+Proyecto realizado en equipo como parte del proceso formativo en desarrollo backend.
 
-## 🧩 Descripcion del proyecto
-La aplicacion simula un entorno e-commerce basico con estructura SaaS (multiempresa), donde cada compania puede administrar su operacion comercial.
+## Descripción del proyecto
 
-Incluye gestion de:
+Nexus of Cloud simula una plataforma e-commerce con estructura multiempresa. Cada compañía puede administrar su operación comercial mediante usuarios con distintos roles, productos, proveedores, sucursales, inventario y ventas.
 
-- Companias y planes
-- Usuarios por rol (superadmin, admin_cliente, gerente, vendedor, cliente_final)
-- Productos
-- Proveedores
-- Sucursales
-- Inventario por sucursal
-- Ventas y detalle de ventas (POS vendedor)
-- Reportes de ventas para perfiles administrativos
+El sistema incluye gestión de:
 
-Ademas de la gestion web con Django Templates, el proyecto expone endpoints API para autenticacion JWT con Django REST Framework.
+- Compañías y planes.
+- Usuarios por rol: `superadmin`, `admin_cliente`, `gerente`, `vendedor` y `cliente_final`.
+- Productos y proveedores.
+- Sucursales e inventario por sucursal.
+- Ventas y detalle de ventas para operación tipo POS.
+- Reportes de ventas para perfiles administrativos.
 
-## ✨ Caracteristicas principales
-- Arquitectura modular por apps Django (`cuentas`, `productos`, `proveedores`, `inventario`, `ventas`, `main`)
-- Modelo de usuario personalizado con roles y permisos por vista
-- CRUD para modulos clave del negocio
-- Flujo de ventas con descuento de stock en inventario
-- Dashboard diferenciado por tipo de usuario
-- API REST de autenticacion con JWT (login y refresh)
-- Interfaz web con plantillas Django y Bootstrap
+Además de la interfaz web basada en plantillas Django, el proyecto expone endpoints de autenticación mediante JWT con Django REST Framework.
 
-## 🛠️ Stack tecnologico
+## Características principales
+
+- Arquitectura modular organizada en aplicaciones Django.
+- Modelo de usuario personalizado con roles y permisos por vista.
+- Operaciones CRUD para los módulos principales.
+- Flujo de ventas con descuento de stock en inventario.
+- Dashboard diferenciado según el tipo de usuario.
+- API REST de autenticación con JWT para inicio y renovación de sesión.
+- Interfaz web con plantillas Django y Bootstrap.
+
+## Tecnologías
+
 - Python 3
 - Django 5.2
 - Django REST Framework
 - Simple JWT (`djangorestframework_simplejwt`)
-- SQLite (entorno de desarrollo)
-- HTML, CSS, JS, Bootstrap
+- SQLite para desarrollo
+- HTML, CSS y JavaScript
+- Bootstrap
 
-## 🗂️ Modulos del sistema
-- Cuentas y autenticacion
-- Companias y planes
-- Productos
-- Proveedores
-- Inventario y sucursales
-- Ventas y reportes
+## Módulos del sistema
 
-## 🚀 Puesta en marcha local
-1. Clonar el repositorio.
-2. Entrar a la carpeta del proyecto.
-3. Crear y activar entorno virtual (si aun no existe).
-4. Instalar dependencias.
-5. Aplicar migraciones.
-6. Iniciar servidor.
+- `cuentas`: autenticación, usuarios y roles.
+- `productos`: administración de productos.
+- `proveedores`: gestión de proveedores.
+- `inventario`: existencias y sucursales.
+- `ventas`: ventas, detalle de ventas y reportes.
+- `main`: vistas generales de la plataforma.
 
-Comandos sugeridos en Windows PowerShell:
+## Puesta en marcha local
+
+### 1. Clonar el repositorio
+
+```powershell
+git clone <url-del-repositorio>
+cd <nombre-del-repositorio>
+```
+
+### 2. Crear y activar el entorno virtual
 
 ```powershell
 python -m venv env
 .\env\Scripts\Activate.ps1
+```
+
+### 3. Instalar dependencias
+
+```powershell
 pip install -r requirements.txt
+```
+
+### 4. Crear y aplicar migraciones
+
+```powershell
 python manage.py makemigrations
 python manage.py migrate
+```
+
+### 5. Iniciar el servidor
+
+```powershell
 python manage.py runserver
 ```
 
-Abrir en navegador:
+## Rutas principales
 
-- `http://127.0.0.1:8000/` (sitio web)
-- `http://127.0.0.1:8000/login/` (login principal)
-- `http://127.0.0.1:8000/admin/` (panel admin Django)
+| Ruta | Descripción |
+|------|-------------|
+| `http://127.0.0.1:8000/` | Sitio web |
+| `http://127.0.0.1:8000/login/` | Inicio de sesión |
+| `http://127.0.0.1:8000/admin/` | Panel de administración Django |
 
-Endpoints API de autenticacion JWT:
+## Endpoints de autenticación JWT
 
-- `http://127.0.0.1:8000/api/auth/login/`
-- `http://127.0.0.1:8000/api/auth/refresh/`
-- `http://127.0.0.1:8000/api/token/`
-- `http://127.0.0.1:8000/api/token/refresh/`
+- `POST /api/auth/login/`
+- `POST /api/auth/refresh/`
+- `POST /api/token/`
+- `POST /api/token/refresh/`
 
-## ☁️ Despliegue
-Como parte del trabajo academico, el proyecto considera una base preparada para evolucionar a entornos de despliegue reales.
+## Despliegue y alcance
 
-## 🎯 Contexto academico
-Este repositorio conserva una entrega importante del curso para poder revisar decisiones, estructura y avances logrados durante la Evaluacion 4.
+El proyecto fue desarrollado como una base académica preparada para evolucionar hacia entornos de despliegue reales. La versión disponible está configurada principalmente para ejecución local con SQLite.
 
-En resumen: una base solida de backend orientada a e-commerce multiempresa, desarrollada en equipo y con valor como referencia para proyectos futuros.
+## Contexto académico
+
+Este repositorio conserva una entrega de la Evaluación 4 de Backend. Su objetivo fue aplicar conceptos de desarrollo web, arquitectura modular, control de acceso, gestión de inventario, flujo de ventas y autenticación basada en tokens dentro de un escenario e-commerce multiempresa.
